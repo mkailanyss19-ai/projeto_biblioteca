@@ -7,17 +7,18 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
+      
         Scanner scanner = new Scanner(System.in);
         ArrayList<Livro> livros = new ArrayList<>();
         ArrayList<Usuario> usuarios = new ArrayList<>();
 
-        // Pré-cadastros
-        livros.add(new Livro("Entendendo Algoritmos", "Aditya Bhargava", 2017));
-        livros.add(new Livro("Java: Como Programar", "Paul Deitel", 2016));
+        livros.add(new Livro("O Príncipe Cruel", "Holly Black", 2018));
+        livros.add(new Livro("Me Chame Pelo Seu Nome", "André Aciman", 2007));
         
-        usuarios.add(new Aluno("Maria Silva", "123.456.789-00", "maria@email.com", "Análise de Sistemas", "Modulo 1"));
-        usuarios.add(new Funcionario("Carlos Souza", "987.654.321-11", "carlos@email.com", "Bibliotecário"));
+        usuarios.add(new Aluno("Kailany Sampaio", "123.456.789-00", "sampaio@email.com", "O Príncipe Cruel"));
+        usuarios.add(new Funcionario("Alisson Rocha", "987.654.321-11", "taehyung@email.com", "Bibliotecário"));
 
         int opcao = -1;
 
@@ -47,7 +48,7 @@ public class Main {
                         scanner.nextLine();
 
                         livros.add(new Livro(titulo, autor, ano));
-                        System.out.println("Livro cadastrado com sucesso!");
+                        System.out.println("Seu livvro foi cadastrado!");
                         break;
 
                     case 2:
@@ -79,14 +80,14 @@ public class Main {
                             System.out.print("Turma: ");
                             String turma = scanner.nextLine();
                             usuarios.add(new Aluno(nome, cpf, email, curso, turma));
-                            System.out.println("Aluno cadastrado com sucesso!");
+                            System.out.println("Aluno cadastrado!");
                         } else if (tipo == 2) {
                             System.out.print("Cargo: ");
                             String cargo = scanner.nextLine();
                             usuarios.add(new Funcionario(nome, cpf, email, cargo));
-                            System.out.println("Funcionário cadastrado com sucesso!");
+                            System.out.println("Funcionário cadastrado!");
                         } else {
-                            System.out.println("Tipo inválido.");
+                            System.out.println("Inválido.");
                         }
                         break;
 
@@ -106,7 +107,7 @@ public class Main {
                         for (int i = 0; i < livros.size(); i++) {
                             System.out.println("[" + i + "] " + livros.get(i));
                         }
-                        System.out.print("Digite o código (índice) do livro que deseja emprestar: ");
+                        System.out.print("Digite o código do livro que deseja pegar emprestrado: ");
                         int idxEmprestimo = scanner.nextInt();
 
                         if (idxEmprestimo >= 0 && idxEmprestimo < livros.size()) {
@@ -115,10 +116,10 @@ public class Main {
                                 System.out.println("Erro: Este livro já está emprestado!");
                             } else {
                                 l.emprestar();
-                                System.out.println("Empréstimo realizado com sucesso!");
+                                System.out.println("Empréstimo realizado!");
                             }
                         } else {
-                            System.out.println("Código de livro inválido.");
+                            System.out.println("Código do livro inválido.");
                         }
                         break;
 
@@ -127,31 +128,33 @@ public class Main {
                         for (int i = 0; i < livros.size(); i++) {
                             System.out.println("[" + i + "] " + livros.get(i));
                         }
-                        System.out.print("Digite o código (índice) do livro que deseja devolver: ");
+                        System.out.print("Digite o código do livro que deseja devolver: ");
                         int idxDevolucao = scanner.nextInt();
 
                         if (idxDevolucao >= 0 && idxDevolucao < livros.size()) {
                             Livro l = livros.get(idxDevolucao);
                             if (l.isDisponivel()) {
                                 System.out.println("Aviso: Este livro já está na biblioteca.");
+                              
                             } else {
                                 l.devolver();
-                                System.out.println("Livro devolvido com sucesso!");
-                            }
-                        } else {
-                            System.out.println("Código de livro inválido.");
-                        }
-                        break;
+                                System.out.println("Seu livro foi devolvido!");
+                         }
+                            } else {
+                               System.out.println("Código do livro inválido.");
+                         }
+                    
+                             break;
 
                     case 7:
-                        System.out.println("Saindo do sistema...");
+                        System.out.println("Saindo do sistema");
                         break;
 
                     default:
-                        System.out.println("Opção inválida! Tente novamente.");
+                        System.out.println("Opção inválida. Tente novamente.");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Erro: Entrada inválida! Por favor, insira números nos campos numéricos.");
+                System.out.println("Erro: Entrada inválida. Insira números nos campos numéricos.");
                 scanner.nextLine();
             }
         }
